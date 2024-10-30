@@ -9,6 +9,9 @@ const TodoInput = () => {
   const { dispatch } = useTodoContext();
 
   const handleAddTodo = () => {
+    if (todoText.length === 0) {
+     alert('Please type something to proceed.')
+    }
     if (todoText.trim()) {
       dispatch({ type: 'ADD_TODO', text: todoText });
       setTodoText('');
