@@ -24,7 +24,7 @@ const TodoList = ({ searchTerm }) => {
                         <TodoItem key={todo.id} {...todo} />
                     ))
                 ) : (
-                    <p>No todos found.</p>
+                    <p>No todos found 😐.</p>
                 )}
         </div>
     );
