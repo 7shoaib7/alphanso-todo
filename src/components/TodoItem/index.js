@@ -1,5 +1,8 @@
 import React from 'react';
 import { useTodoContext } from '../../context/TodoContext';
+import completeTodo from "../../assets/completed.png"
+import incompleteTodo from "../../assets/incomplete.png"
+import closeIcon from "../../assets/close.png"
 import './TodoItem.css'
 
 const TodoItem = ({ id, text, completed }) => {
@@ -18,15 +21,15 @@ const TodoItem = ({ id, text, completed }) => {
             background: completed ? '#e9f5e1' : '#f0f0f0'
         }}>
             <div className="todo-details">
-                <input
-                    type="checkbox"
-                    checked={completed}
-                    onChange={() => dispatch({ type: 'TOGGLE_TODO', id })}
+                <img
+                    src={completed ? completeTodo : incompleteTodo}
+                    className="todo-check"
+                    alt={`todo-${completed}`}
+                    onClick={() => dispatch({ type: 'TOGGLE_TODO', id })} 
                 />
                 <span className='todo-text'>{text}</span>
             </div>
-
-            <span onClick={handleDelete} className='delete-todo'>x</span>
+            <img src={closeIcon} alt="closeIcon" onClick={handleDelete} className="delete-icon"/>
         </div>
     );
 };
