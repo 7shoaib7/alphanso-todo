@@ -1,26 +1,37 @@
 
+import { useState } from "react";
 //components
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
 import TodoSearch from "./components/TodoSearch";
 //context
 import { useTodoContext } from "./context/TodoContext";
+//hooks
+import useDebounce from "./hooks/useDebounce";
+
 
 
 
 function App() {
   const { state,dispatch} = useTodoContext();
+  const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
   const handleFilterChange = (filter) => {
     dispatch({ type: 'SET_FILTER', filter });
   };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
 
 
   return (
     <div className="App">
       <div className="top-header">
         <h1>Today</h1>
-        <TodoSearch />
+        <TodoSearch handleSearchChange={handleSearchChange}/>
         <div className="todo-filter-container">
         {['all', 'completed', 'incomplete'].map(filter => (
           <div
@@ -37,7 +48,7 @@ function App() {
         ))}
         </div>
       </div>
-      <TodoList />
+      <TodoList searchTerm={debouncedSearchTerm}/>
       <TodoInput />
     </div>
   );

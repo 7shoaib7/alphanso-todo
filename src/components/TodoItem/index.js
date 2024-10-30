@@ -13,7 +13,10 @@ const TodoItem = ({ id, text, completed }) => {
     };
 
     return (
-        <div className="todo-item">
+        <div className="todo-item" style={{
+            border: completed ? '1px solid #00a278' : '2px solid #F0F0F0',
+            background: completed ? '#e9f5e1' : '#f0f0f0'
+        }}>
             <div className="todo-details">
                 <input
                     type="checkbox"
